@@ -1,5 +1,5 @@
 :root {
-  --body-bg-color: #eee;
+  --body-bg-color: #282c35;
   --content-bg-color: #fff;
   --card-bg-color: #f5f5f5;
   --text-color: #555;
@@ -26,8 +26,8 @@
 }
 @media (prefers-color-scheme: dark) {
   :root {
-    --body-bg-color: #282828;
-    --content-bg-color: #333;
+    --body-bg-color: #282c35;
+    --content-bg-color: #1b1e25;
     --card-bg-color: #555;
     --text-color: #ccc;
     --blockquote-color: #bbb;
@@ -458,7 +458,7 @@ pre figcaption a:hover {
 }
 pre,
 code {
-  font-family: Fira Code, consolas, Menlo, monospace, 'PingFang SC', 'Microsoft YaHei';
+  font-family: Noto Sans KR, consolas, Menlo, monospace, 'PingFang SC', 'Microsoft YaHei';
 }
 code {
   border-radius: 3px;
@@ -2747,10 +2747,10 @@ ul.breadcrumb li:last-child {
 }
 .post-body h1,
 .post-body h2 {
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #282c35;
 }
 .post-body h3 {
-  border-bottom: 1px dotted #eee;
+  border-bottom: 1px dotted #282c35;
 }
 @media (min-width: 768px) and (max-width: 991px) {
   .main-inner {
