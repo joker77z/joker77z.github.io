@@ -1424,7 +1424,7 @@ header.header {
   display: block;
 }
 .sidebar-toggle {
-  bottom: 75px;
+  bottom: 25px;
   height: 12px;
   padding: 6px 5px;
   width: 14px;
@@ -2730,7 +2730,7 @@ hr {
   vertical-align: middle;
 }
 .links-of-author a::before {
-  background: #13ebff;
+  background: #cbc38b;
   display: inline-block;
   margin-right: 3px;
   transform: translateY(-2px);
