@@ -237,6 +237,17 @@ h6 {
   font-family: Song Myung, Song Myung, 'PingFang SC', 'Microsoft YaHei', sans-serif;
   font-weight: bold;
   line-height: 1.5;
+}
+h1 {
+  margin: 90px 0 15px;
+}
+h2 {
+  margin: 60px 0 15px;
+}
+h3 {
+  margin: 30px 0 15px;
+}
+h4 {
   margin: 30px 0 15px;
 }
 h1 {
@@ -2730,7 +2741,7 @@ hr {
   vertical-align: middle;
 }
 .links-of-author a::before {
-  background: #d7dbff;
+  background: #38ff6f;
   display: inline-block;
   margin-right: 3px;
   transform: translateY(-2px);
