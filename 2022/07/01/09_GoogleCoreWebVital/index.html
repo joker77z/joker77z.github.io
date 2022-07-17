@@ -20,16 +20,16 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"joker77z.github.io","root":"/","images":"/images","scheme":"Mist","darkmode":true,"version":"8.12.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null,"activeClass":"utterances"},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="구글의 Core Web Vital이란?구글의 코어 웹 바이탈은 웹 페이지 로딩 속도, 모바일 친화성, 세이프 브라우징, 암호화(HTTPS적용 여부), 방해요소 여부 등과 같은 웹 콘텐츠 이용자의 사용자 경험을 측정하는 많은 요인 중에서 구글이 중요하다 강조하는 3가지 메트릭스 LCP(Largest Contentful Pain), FID(First Inpu">
+    <meta name="description" content="구글의 Core Web Vital이란?구글의 코어 웹 바이탈은 사용자 경험을 측정하는 많은 요인 중에서 구글이 중요하다 강조하는 3가지 메트릭스 LCP(Largest Contentful Pain), FID(First Input Delay), CLS(Cumulative Layout Shift)를 중요시 하는 개념입니다.  LCP(Largest Content">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Google Core Web Vital">
 <meta property="og:url" content="https://joker77z.github.io/2022/07/01/09_GoogleCoreWebVital/index.html">
 <meta property="og:site_name" content="TaeJoon Park">
-<meta property="og:description" content="구글의 Core Web Vital이란?구글의 코어 웹 바이탈은 웹 페이지 로딩 속도, 모바일 친화성, 세이프 브라우징, 암호화(HTTPS적용 여부), 방해요소 여부 등과 같은 웹 콘텐츠 이용자의 사용자 경험을 측정하는 많은 요인 중에서 구글이 중요하다 강조하는 3가지 메트릭스 LCP(Largest Contentful Pain), FID(First Inpu">
+<meta property="og:description" content="구글의 Core Web Vital이란?구글의 코어 웹 바이탈은 사용자 경험을 측정하는 많은 요인 중에서 구글이 중요하다 강조하는 3가지 메트릭스 LCP(Largest Contentful Pain), FID(First Input Delay), CLS(Cumulative Layout Shift)를 중요시 하는 개념입니다.  LCP(Largest Content">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:image" content="https://joker77z.github.io/image/image-20220702125220625.png">
 <meta property="article:published_time" content="2022-07-01T00:29:50.000Z">
-<meta property="article:modified_time" content="2022-07-03T15:26:41.724Z">
+<meta property="article:modified_time" content="2022-07-17T12:44:10.666Z">
 <meta property="article:author" content="TaeJoon Park">
 <meta property="article:tag" content="performance">
 <meta name="twitter:card" content="summary">
@@ -121,7 +121,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%EA%B5%AC%EA%B8%80%EC%9D%98-Core-Web-Vital%EC%9D%B4%EB%9E%80"><span class="nav-number">1.</span> <span class="nav-text">구글의 Core Web Vital이란?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EA%B8%B0%EC%A4%80"><span class="nav-number">2.</span> <span class="nav-text">기준</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EC%BD%94%EC%96%B4-%EC%9B%B9-%EB%B0%94%EC%9D%B4%ED%83%88%EC%9D%98-%EA%B2%BD%EC%9A%B0-%EB%8B%A4-%EC%82%AC%EC%9A%A9%EC%9E%90-%EA%B2%BD%ED%97%98%EA%B3%BC-%EC%97%B0%EA%B4%80%EC%84%B1%EC%9D%B4-%EC%9E%88%EB%8B%A4-%EC%82%AC%EC%9A%A9%EC%9E%90-%EA%B2%BD%ED%97%98%EC%9D%84-%ED%96%A5%EC%83%81%EC%8B%9C%ED%82%A4%EB%8A%94-%EA%B2%83%EC%9D%B4-%EC%99%9C-%EC%A4%91%EC%9A%94%ED%95%A0%EA%B9%8C"><span class="nav-number">3.</span> <span class="nav-text">코어 웹 바이탈의 경우 다 사용자 경험과 연관성이 있다. 사용자 경험을 향상시키는 것이 왜 중요할까?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EC%82%AC%EC%9A%A9%EC%9E%90-%EA%B2%BD%ED%97%98-%EC%9D%B4%EC%99%B8%EC%97%90-%EB%8D%94-%EC%A2%8B%EC%9D%80-%EC%A0%90%EC%9D%B4-%EC%9E%88%EC%9D%84%EA%B9%8C"><span class="nav-number">4.</span> <span class="nav-text">사용자 경험 이외에 더 좋은 점이 있을까?</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%EC%B0%B8%EC%A1%B0"><span class="nav-number">4.1.</span> <span class="nav-text">참조</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%EA%B5%AC%EA%B8%80%EC%9D%98-Core-Web-Vital%EC%9D%B4%EB%9E%80"><span class="nav-number">1.</span> <span class="nav-text">구글의 Core Web Vital이란?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EA%B8%B0%EC%A4%80"><span class="nav-number">2.</span> <span class="nav-text">기준</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EC%BD%94%EC%96%B4-%EC%9B%B9-%EB%B0%94%EC%9D%B4%ED%83%88%EC%9D%98-%EA%B2%BD%EC%9A%B0-%EB%8B%A4-%EC%82%AC%EC%9A%A9%EC%9E%90-%EA%B2%BD%ED%97%98%EA%B3%BC-%EC%97%B0%EA%B4%80%EC%84%B1%EC%9D%B4-%EC%9E%88%EB%8B%A4-%EC%82%AC%EC%9A%A9%EC%9E%90-%EA%B2%BD%ED%97%98%EC%9D%84-%ED%96%A5%EC%83%81%EC%8B%9C%ED%82%A4%EB%8A%94-%EA%B2%83%EC%9D%B4-%EC%99%9C-%EC%A4%91%EC%9A%94%ED%95%A0%EA%B9%8C"><span class="nav-number">3.</span> <span class="nav-text">코어 웹 바이탈의 경우 다 사용자 경험과 연관성이 있다. 사용자 경험을 향상시키는 것이 왜 중요할까?</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%EC%B0%B8%EC%A1%B0"><span class="nav-number">3.1.</span> <span class="nav-text">참조</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -219,7 +219,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Updated at: 2022-07-04 00:26:41" itemprop="dateModified" datetime="2022-07-04T00:26:41+09:00">2022-07-04</time>
+      <time title="Updated at: 2022-07-17 21:44:10" itemprop="dateModified" datetime="2022-07-17T21:44:10+09:00">2022-07-17</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -242,7 +242,7 @@
     
     <div class="post-body" itemprop="articleBody">
         <p><img src="/../image/image-20220702125220625.png" alt="image-20220702125220625"></p>
-<h2 id="구글의-Core-Web-Vital이란"><a href="#구글의-Core-Web-Vital이란" class="headerlink" title="구글의 Core Web Vital이란?"></a>구글의 Core Web Vital이란?</h2><p>구글의 코어 웹 바이탈은 웹 페이지 로딩 속도, 모바일 친화성, 세이프 브라우징, 암호화(HTTPS적용 여부), 방해요소 여부 등과 같은 웹 콘텐츠 이용자의 사용자 경험을 측정하는 많은 요인 중에서 구글이 중요하다 강조하는 3가지 메트릭스 LCP(Largest Contentful Pain), FID(First Input Delay), CLS(Cumulative Layout Shift)를 중요시 하는 개념입니다.</p>
+<h2 id="구글의-Core-Web-Vital이란"><a href="#구글의-Core-Web-Vital이란" class="headerlink" title="구글의 Core Web Vital이란?"></a>구글의 Core Web Vital이란?</h2><p>구글의 코어 웹 바이탈은 사용자 경험을 측정하는 많은 요인 중에서 구글이 중요하다 강조하는 3가지 메트릭스 LCP(Largest Contentful Pain), FID(First Input Delay), CLS(Cumulative Layout Shift)를 중요시 하는 개념입니다.</p>
 <ul>
 <li>LCP(Largest Contentful Pain)는 가장 큰 콘텐츠가 렌더링되는데 걸리는 시간입니다. 일반적으로 이미지 또는 동영상이거나 큰 블록 수준의 텍스트 요소입니다.</li>
 <li>FID(First Input Delay)는 사용자가 페이지와 처음 상호작용 했을 때 브라우저가 반응하기까지 걸리는 시간입니다.</li>
@@ -277,15 +277,14 @@
 </tr>
 </tbody></table>
 <p>LCP의 큰 콘텐츠를 로드하는데 걸리는 시간, FID의 반응 시간, CLS의 레이아웃 변화의 정도. 다 낮을 수록 좋은 지표를 뜻합니다.</p>
-<h2 id="코어-웹-바이탈의-경우-다-사용자-경험과-연관성이-있다-사용자-경험을-향상시키는-것이-왜-중요할까"><a href="#코어-웹-바이탈의-경우-다-사용자-경험과-연관성이-있다-사용자-경험을-향상시키는-것이-왜-중요할까" class="headerlink" title="코어 웹 바이탈의 경우 다 사용자 경험과 연관성이 있다. 사용자 경험을 향상시키는 것이 왜 중요할까?"></a>코어 웹 바이탈의 경우 다 사용자 경험과 연관성이 있다. 사용자 경험을 향상시키는 것이 왜 중요할까?</h2><p>페이지 로드 시간이 길수록 이탈률에 큰 영향을 미칩니다.</p>
+<h2 id="코어-웹-바이탈의-경우-다-사용자-경험과-연관성이-있다-사용자-경험을-향상시키는-것이-왜-중요할까"><a href="#코어-웹-바이탈의-경우-다-사용자-경험과-연관성이-있다-사용자-경험을-향상시키는-것이-왜-중요할까" class="headerlink" title="코어 웹 바이탈의 경우 다 사용자 경험과 연관성이 있다. 사용자 경험을 향상시키는 것이 왜 중요할까?"></a>코어 웹 바이탈의 경우 다 사용자 경험과 연관성이 있다. 사용자 경험을 향상시키는 것이 왜 중요할까?</h2><p>예를 들어 LCP로 인해 페이지 로드 시간이 늦어진다면 사용자 이탈률에 큰 영향을 미칩니다.</p>
 <ul>
 <li>페이지 로드 시간이 1초에서 3초로 늘어나면 <strong>이탈률은 32% 증가합니다</strong>.</li>
 <li>페이지 로드 시간이 1초에서 6초로 늘어나면 <strong>이탈률은 106% 증가합니다</strong>.</li>
 </ul>
 <blockquote>
-<p>사례들은 이곳에서 더 볼 수 있습니다. <a target="_blank" rel="noopener" href="https://wpostats.com/">https://wpostats.com/</a></p>
+<p>다양한 사례들은 이곳에서 확인할 수 있습니다. <a target="_blank" rel="noopener" href="https://wpostats.com/">https://wpostats.com/</a></p>
 </blockquote>
-<h2 id="사용자-경험-이외에-더-좋은-점이-있을까"><a href="#사용자-경험-이외에-더-좋은-점이-있을까" class="headerlink" title="사용자 경험 이외에 더 좋은 점이 있을까?"></a>사용자 경험 이외에 더 좋은 점이 있을까?</h2><p>SEO에 중요합니다. 구글이 자체적으로 진행했던 연구 결과에 따르면 Core Web Vital의 기준을 충족한 웹 페이지의 경우 방문자가 사이트에서 이탈할 가능성이 24%나 낮다고 합니다. 공개적으로 구글이 코어 웹 바이탈 매트릭스를 랭킹 요소라고 밝히지는 않지만, 소비자 피드백을 중시하는 랭킹 알고리즘이라고 할 수 있는 랭크브레인을 고려하면 사용자 경험을 개선하기위해 이용되는 코어 웹 바이탈 매트릭스는 SEO에서 중요한 의미를 갖는다고 말할 수 있습니다.</p>
 <hr>
 <h3 id="참조"><a href="#참조" class="headerlink" title="참조"></a>참조</h3><ul>
 <li><a target="_blank" rel="noopener" href="https://support.google.com/webmasters/answer/9205520?hl=ko">코어 웹 바이탈 보고서</a></li>
