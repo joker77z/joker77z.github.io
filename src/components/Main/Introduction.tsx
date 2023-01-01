@@ -5,7 +5,21 @@ import { IGatsbyImageData } from 'gatsby-plugin-image'
 
 const Background = styled.div`
   width: 100%;
-  background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);
+  background-image: linear-gradient(
+    to right top,
+    #d16ba5,
+    #c777b9,
+    #ba83ca,
+    #aa8fd8,
+    #9a9ae1,
+    #8aa7ec,
+    #79b3f4,
+    #69bff8,
+    #52cffe,
+    #41dfff,
+    #46eefa,
+    #5ffbf1
+  );
   color: #ffffff;
 `
 const Wrapper = styled.div`
@@ -54,8 +68,8 @@ export default function FunctionComponent({ profileImage }: IntroductionProps) {
         <ProfileImage profileImage={profileImage} />
 
         <div>
-          <SubTitle>Nice to Meet You,</SubTitle>
-          <Title>I'm Junior Frontend Taejoon Park.</Title>
+          <SubTitle>FrontEnd Developer</SubTitle>
+          <Title>Park Tae Joon</Title>
         </div>
       </Wrapper>
     </Background>

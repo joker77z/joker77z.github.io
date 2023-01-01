@@ -76,6 +76,18 @@ const PostData = styled.div`
   }
 `
 
+const Tag = styled.div`
+  background: #2e2e2e;
+  color: white;
+  display: inline-block;
+  border-radius: 20px;
+  padding: 2px 10px;
+
+  &:nth-child(n + 2) {
+    margin-left: 10px;
+  }
+`
+
 const PostHeadInfo: FunctionComponent<PostHeadInfoProps> = function ({
   title,
   date,
@@ -90,7 +102,11 @@ const PostHeadInfo: FunctionComponent<PostHeadInfoProps> = function ({
       </PrevPageIcon>
       <Title>{title}</Title>
       <PostData>
-        <div>{categories.join(' / ')}</div>
+        <div>
+          {categories.map(tag => (
+            <Tag>{tag}</Tag>
+          ))}
+        </div>
         <div>{date}</div>
       </PostData>
     </PostHeadInfoWrapper>
