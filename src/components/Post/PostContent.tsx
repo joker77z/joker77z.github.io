@@ -25,17 +25,29 @@ const MarkdownRenderer = styled.div`
   }
 
   // Adjust Heading Element Style
-  h1,
+  h1 {
+    border-bottom: 2px solid black;
+  }
+
   h2,
   h3 {
     font-weight: 800;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
   }
 
   * + h1,
   * + h2,
   * + h3 {
     margin-top: 80px;
+  }
+
+  h1 + h2,
+  h2 + h3 {
+    margin-top: 10px;
+  }
+  h1 + p,
+  h2 + p {
+    margin-top: 10px;
   }
 
   hr + h1,
