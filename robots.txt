@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
-Sitemap: https://joker77z.github.io/sitemap-index.xml
+Sitemap: https://joker77z.github.io/sitemap.xml
 Host: https://joker77z.github.io
