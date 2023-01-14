@@ -15,7 +15,7 @@ module.exports = {
     siteUrl: `https://joker77z.github.io`,
   },
   plugins: [
-    'gatsby-plugin-sitemap',
+    'gatsby-plugin-advanced-sitemap',
     {
       resolve: 'gatsby-plugin-canonical-urls',
       options: {
@@ -38,8 +38,8 @@ module.exports = {
           formats: ['auto', 'webp'],
           quality: 100,
           placeholder: 'blurred',
-        }
-      }
+        },
+      },
     },
     {
       resolve: `gatsby-source-filesystem`,
