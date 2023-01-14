@@ -66,6 +66,8 @@ module.exports = {
           {
             resolve: 'gatsby-plugin-robots-txt',
             options: {
+              host: 'https://joker77z.github.io',
+              sitemap: 'https://joker77z.github.io/sitemap.xml',
               policy: [{ userAgent: '*', allow: '/' }],
             },
           },
