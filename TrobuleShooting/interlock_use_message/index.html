@@ -6,24 +6,20 @@
 <p>우리의 목표는 채용사이트에서 [지원서 작성]을 누르면 다른 도메인의 로그인 팝업창이 뜨게 되고 거기서 로그인해야 지원서 작성 페이지에 도달할 수 있게 하는 것이다.
 (이해를 돕기 위해 예를 들어보자. 사람인에서 [지원서 작성]버튼을 누르면 새로 개발한 채용시스템(다른 도메인)에 로그인해야만 지원서 작성을 할 수 있는 형태로 계약이 나온 상황이다. <strong>중간에 다른 사이트 로그인을 한번 더 해야 한다는 것</strong>. 사용자 UX상에는 큰 불편함을 야기할 수 있지만 사업 쪽 입장에서는 신규 서비스에 구직자 풀을 생성하기 위해 현재와 같은 방식이 나왔다.)</p>
 <h2>요구조건</h2>
-<p>침착하고 요구 조건을 정리하자.</p>
+<p>침착하고 요구 사항을 정리하자.</p>
 <ul>
 <li>[채용사이트 > B도메인 로그인 > 지원서 작성]
 <ul>
-<li>B도메인 창은 팝업 형태로 떠야 한다.</li>
-<li>B도메인 로그인 팝업에서 로그인을 성공했을 때는 [지원서 작성]페이지가 열려야 하고 B도메인 로그인 팝업은 닫혀야 한다.</li>
-</ul>
-</li>
-<li>B도메인 로그인 성공 시
-<ul>
-<li>accessToken을 web storage에 저장해야 한다.</li>
-<li>[지원서 작성] 페이지로 바로 접근 시 accessToken이 없기 때문에 접근 불가 창이 뜨면서 페이지 접속을 차단한다.</li>
-<li>accessToken이 있다면 [지원서 작성]페이지에서 B도메인에게 사용자 이름, 이메일, 전화번호를 받아온다.</li>
+<li>[B도메인 로그인]은 팝업 형태로 떠야 한다.</li>
+<li>[B도메인 로그인 팝업]에서 로그인을 성공했을 때는 [지원서 작성]페이지가 열려야 하고 [B도메인 로그인 팝업]은 닫혀야 한다.</li>
+<li>[B도메인 로그인] 성공 시 accessToken을 받아와서 web storage에 저장해야 한다. 즉, 다른 도메인으로 전달해야 한다.</li>
+<li>[지원서 작성] 페이지로 바로 접근 시에는 [B도메인 로그인 팝업]을 건너 뛰고 들어왔기 때문에 [채용 사이트]로 돌려보낸다.</li>
+<li>[지원서 작성] 페이지에서 url에 쿼리가 없는 상태(즉, 어떤 공고인지 모르는 상태)일 때는 공고를 선택할 수 있어야 하며, 선택하면 [B도메인 로그인 팝업]에서 로그인을 했을 때 [B도메인 팝업]이 종료되고 message를 받아온 뒤 사용자 정보가 자동으로 입력된다.</li>
 </ul>
 </li>
 </ul>
 <blockquote>
-<p>요구 조건만 보면 굉장히 간단해서 하루면 개발이 끝날 줄 알았다. 이는 큰 착오였다.</p>
+<p>요구 조건을 정리했을 때는 금방 개발이 끝날 줄 알았다. 이는 큰 착오였다.</p>
 </blockquote>
 <h2>시행착오</h2>
 <h3>첫 번째 시도</h3>
@@ -41,7 +37,7 @@
   >
     <span
     class="gatsby-resp-image-background-image"
-    style="padding-bottom: 101.04166666666666%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAIAAAAC64paAAAACXBIWXMAAAsTAAALEwEAmpwYAAABjElEQVR42r1Ty07DMBAcr52ktpM4sduSllKgRKQSp5byFALEpULiY/gPrhw5ICEkPoGP4WNQGhAIiSRcGPmw0np2Z9Zr4BsYY1VAq2DgcHOCthCc9621xniCAFwf4fUOMqjq/k4jKm8vl8uXp6fHh4fFfAbg/pbenssSADj9Tq4En59dTIfF8d7x/mxBnFIjremEOlBKVdXryHm+s1gcXF2enh5OlQ7ns/luMZ1MdpxzURT5vl/nufIVa4wGkdJxv9cdZjZJUuec7/ta67r+RIwYIgmjP3x2zde0pJS14oHMidGavzUQgYf1LhuWB1tZmWogc6L13tpkY3M8GHEiweEMiEHwMtswNiIWeH4aCmsCMOIcmSsVM85aya4GlvQFeprlCZ/EGEXoS+4Jm6ZCiIY98wRCJ5BpbBtsRBiG6EkQ00pzzlssKvuUwT52vdnzD/0/0OC5Hv9C1lqbFZIkMcY454hIStlqYGEYdjqdoijyPB+Px3EcG2OklKzuW39CKVV1jlew1rZ7pL/gHaubH7lyMwRiAAAAAElFTkSuQmCC'); background-size: cover; display: block;"
+    style="padding-bottom: 101.04166666666666%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAIAAAAC64paAAAACXBIWXMAAAsTAAALEwEAmpwYAAABkElEQVR42r1Ty27bMBAcLinJfIiURNmRVdt5SIUN9FLbaVMXAZxTihz6L/2PXHPLIUCAIL/Qj+nHFIqaIggQSb10DsQCu8OdWS6BF2CMtQE9BaXH968YCsH5xHvvXCAIwNUZfl5DRu29b9OImupvl5eP9/d3t7fbzRrAzQ/69YCrz00Bp7fJreD9+X5Vrr582G3Xp8QpsSNnI6MjpVR7exe5qqrN9vRiv9t9WiltPq439fvVyXGV5z6O4zAMuzy3vmKN+dQobSfjvCyyJEmzzIdhqLXu6c8JsYLTf3zmrh1+c0opO8lA4cXsIDiaiihAmbMyxzTHUdGkesicaDYpqvnh4XQmiISAd01bwZtsz9iIWBiEiRGpjcCIcxRZo5hxNkg2AKuQTATGitUJP7F4ZzCWJHiapkKInj0LBIwPUGgcO8xjlA0ZxLTSnPMBi8qeZTD8HXeP51f6X6HHczf+C1lrbV8gyzIiklIOGpgxZjQaLZfLuq4Xi4W11jknpWRd3/oZSqm2Z/yENE2HPdK/4Dcafh9zaE9+TQAAAABJRU5ErkJggg=='); background-size: cover; display: block;"
   ></span>
   <picture>
           <source
@@ -75,18 +71,7 @@
 <li>[B도메인 로그인] 팝업 창이 뜨고 로그인 성공 시 로그인을 성공했다는 message를 부모인 [채용사이트]에게 전달한다.</li>
 <li>[채용 사이트]에서는 메세지를 받을 때까지 기다리고 있다가 message를 받으면 [B도메인 로그인]창을 종료하고 [지원서 작성]페이지를 연다.</li>
 </ol>
-<div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"><span class="token keyword">const</span> <span class="token function-variable function">jobdaLoginMessageFn</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">event</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
-    <span class="token keyword">if</span><span class="token punctuation">(</span>event<span class="token punctuation">.</span>origin <span class="token operator">===</span> jobdaDomain<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">const</span> <span class="token punctuation">{</span><span class="token literal-property property">data</span><span class="token operator">:</span> <span class="token punctuation">{</span>accessToken<span class="token punctuation">}</span><span class="token punctuation">}</span> <span class="token operator">=</span> event<span class="token punctuation">;</span>
-        <span class="token keyword">if</span><span class="token punctuation">(</span>accessToken<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            jobdaLoginPopup<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            sessionStorage<span class="token punctuation">.</span><span class="token function">setItem</span><span class="token punctuation">(</span><span class="token string">'accessToken'</span><span class="token punctuation">,</span> accessToken<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            window<span class="token punctuation">.</span><span class="token function">open</span><span class="token punctuation">(</span><span class="token function">$</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">data</span><span class="token punctuation">(</span><span class="token string">'link'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token punctuation">}</span>
-        <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-window<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'message'</span><span class="token punctuation">,</span> jobdaLoginMessageFn<span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token literal-property property">once</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
+<div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"></code></pre></div>
 <blockquote>
 <p>이론 상으로 완벽(?)해 보였다..</p>
 </blockquote>
@@ -98,7 +83,7 @@ window<span class="token punctuation">.</span><span class="token function">addEv
           <span class="token string">'브라우저 우측 상단에서 팝업을 허용해 주세요.'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre></div>
 <blockquote>
-<p>하지만, 몇 달 뒤 팝압 차단으로 인해 다른 방법을 시도한다.</p>
+<p>하지만, 출시 직전.. 팝업 차단을 아예 빼달라는 요청이 오게된다.</p>
 </blockquote>
 <h3>두 번째 시도</h3>
 <p>채용사이트에서 두 가지 일을 하는 것은 팝업 차단이 일어나니, 한 가지 일을 각자의 도메인에서 수행하면 될 것 같았다.</p>
@@ -115,7 +100,7 @@ window<span class="token punctuation">.</span><span class="token function">addEv
   >
     <span
     class="gatsby-resp-image-background-image"
-    style="padding-bottom: 102.60416666666667%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAVCAIAAADJt1n/AAAACXBIWXMAAAsTAAALEwEAmpwYAAABnklEQVR42pVTy2pUQRCtrr79ft1Hz9yZnrnXTC4ak6XLLFQQsvCx9AtEgkSREIgfkI249mP8Af9LeowBHTA9h6aoput0VZ2iAHZAyK0jGPAK9gZitpdv4f3r7FAs4Lx59fLTh/MXz58CQG3h53f48Q0k/6uc3TrzS0rpy9X11cXl54uPxrWrCF/P8eYd6VsKQO8hj+N4+uQ0+eXZs7NhXEtpKZtRFrWx1hpKq//3iav1ajwYN5uNECKl5cnJ0aOHh13XSimFEIVqoTWGMdl4EZxgXCtlEMk9NPIH2QeY19C6PDDJ9hsWMYocJrLssp03t9+VUbeBtQOnYQ/a71giKCA2DfqAUNF8LQVDMAweeJhqWFnoDWgGFZaRKZENh6gxOVxYaGXlJGBB7RSzwus5mXmwRgkulJSzvuclc0bMIqWYrVZSKTULYez71rlSqZdddrTWSikC4KyF8jktWmi9n4ZhGoY6BFeYNrdN6XphQwj19njvY4yIZWpLKRljXdc9Pj6epinGyDkvXQxKqd3Ce++2sNaWZr7bkH9WZRe/APUhIDFD/j1yAAAAAElFTkSuQmCC'); background-size: cover; display: block;"
+    style="padding-bottom: 102.60416666666667%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAVCAIAAADJt1n/AAAACXBIWXMAAAsTAAALEwEAmpwYAAABoElEQVR42pVUy2oUQRQ9fWvq2VXV3dWVSU/39DiZRjOIK5cKKggBFXd+gIuABokkoHs3Llz7MX6APyadTiCEjNQcisu9UKfOfXALuIXsBlMoOcQMe4NotJcfcPpudBglcN6/fXP++dPrVy8AlBZ/f+PPLygxJbWDM+XZdu33y28XZ1/Pz75YF9qIn6fsx0eaBwawXdxrcr/qnz991hXdycuTvl8qbRmPjNcmt9bmjM3+Xyd1y261Xq2P1kKItl08eXz86OGmroNSUgiR2C3Kc8O5qgpZOMmFUdrQzqLvHVWGgxLBjQNTfM9p5RqbFk2No0V2UE2vpWHSLh2c2Yc23c0kA1FVkS8IjI1hKjgh53jgMZRYOjQ5DMeM0sgsU5VANNQ6aiyCnDkJSsidEYJHP8/mHjbXQkit9fzwUEqZtBLeoIujNVpprWNZrpomOJfa6qYeHWOM1jrLMmst0ufUBATvhn459H1ZFC5RdiybsX5hi6Ior473PsZIlNZtpRTnPISw3W43wxBjFEIkNWxStlfw3jvnJj9V+faG3PnV7uAfNk8gAYSVkI8AAAAASUVORK5CYII='); background-size: cover; display: block;"
   ></span>
   <picture>
           <source
@@ -150,16 +135,40 @@ window<span class="token punctuation">.</span><span class="token function">addEv
 <li>[채용 사이트]에서 [지원서 작성]을 클릭한다.</li>
 <li>[B도메인 로그인] 팝업 창이 뜨고 로그인 성공 시 지원서 작성 페이지를 오픈 한다.</li>
 <li>[지원서 작성]페이지에서 페이지가 열렸을 때 [B도메인 로그인] 팝업 창으로 accessToken을 요청한다.</li>
-<li>[B도메인 로그인] 팝업 창에서 accessToken을 메세지로 보낸다.</li>
-<li>[지원서 작성] 페이지에서 accessToken을 받았다면 부모 창인 [B도메인 로그인]창을 종료하고 사용자 정보를 조회한다.</li>
+<li>[B도메인 로그인] 팝업 창에서 [지원서 작성]페이지로 accessToken을 메세지로 보낸다.</li>
+<li>[지원서 작성] 페이지에서 accessToken을 받았다면 부모 창인 [B도메인 로그인]창을 종료하고 accessToken을 이용해서 사용자 정보를 조회한다.</li>
 </ol>
+<div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"></code></pre></div>
 <blockquote>
-<p>이 flow 또한 복잡하긴 하지만 가능할 것 같다고 생각했다.</p>
+<p>사실 이 두번째 방법과 비슷하게 다양한 방법을 시도했다. 대표적으로는 [B도메인 로그인] 팝업 창에서 [지원서 작성]창을 띄우면서 바로 [B도메인 로그인] 팝업을 종료하는 방법을 시도했는데, 이건 B도메인 로그인 팝업창을 스스로 끌 수 없었다. 네이버를 키고 브라우저 개발자 도구에서 서로 다른 도메인으로 부모에서 자식 브라우저를 키고 또 킨 상태에서 첫번째 자식이 스스로 window.close()했을 때 잘 꺼졌는데.. 서비스에서 왜 꺼지지 않는지 이유는 아직도 이해할 수 없다. 요즘 팝업을 잘 사용하지 않아서 인지 원하는 정보를 찾을 수는 없었다.</p>
 </blockquote>
-<h3>결과</h3></div><style data-emotion="css hx9xpc">@media (max-width: 768px){.css-hx9xpc{padding:0 20px;}}</style><div class="css-hx9xpc e1gqsjds0"></div><style data-emotion="css 9w9jmx">.css-9w9jmx{display:grid;place-items:center;margin-top:auto;padding:50px 0;font-size:15px;text-align:center;line-height:1.5;}@media (max-width: 768px){.css-9w9jmx{font-size:13px;}}</style><footer class="css-9w9jmx e1oae0v80">Thank You for Visiting My blog, Have a Good Day 😆<br/>© 2023 Developer Park, Powered By Gatsby.</footer></main></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/TrobuleShooting/interlock_use_message/";/*]]>*/</script><!-- slice-start id="_gatsby-scripts-1" -->
+<h3>결과</h3>
+<p>B도메인에서 로그인했을 때 자동 로그인이 되고 꺼지는 부분을 망각했다. 이 때는 [로그인]버튼을 누르지 않았기 때문에 자동으로 [지원서 작성]페이지를 띄우는 것에 대해 브라우저가 차단하는 것이었다.</p>
+<p>요구사항을 사전에 정리를 했음에도 다양한 변수, 부족한 개발 시간 때문에 가능성이 보여서 일단 개발 시작한 것이 패착이 되었다. 물론, 모든 것을 완벽하게 다 파악하고 개발할 수는 없지만, 이번에 마지막 개발 성공할 때 플라우차트를 그리고 했었는데 기획도 좋아했고, 셀장님도 너무 좋았다. 역시 시각적인 자료가 이해에 도움이 많이 되는 듯 하다. 특히 이번 경우와 같이 다양한 것을 고려해야 할 때는 빛을 발하는 것 같다.</p>
+<p>기타 form 방식</p>
+<p>최종해결 리다이렉트</p>
+<h3>세 번째 시도</h3>
+<h3>결과</h3>
+<h3>기타 시도</h3>
+<ul>
+<li>form방식을 이용해서 [B도메인 로그인]팝업에서 [지원서 작성]창을 띄우는 것도 해봤다. 기본적으로 팝업차단이 걸렸고, 다른 도메인이라서 안전하지 않은 페이지라고 브라우저에서 막더라.</li>
+<li>[B도메인 로그인]페이지를 새 탭으로 열고 리다이렉트 방식으로 [지원서 작성]페이지를 열어줄 때 리다이렉트 방식은 message로 accessToken을 전달해 줄 수 없기 때문에 url로 전달해야 했다. url에 accessToken이 보안상에 위험할 수 있다고 판단했고, accessToken을 url로 받아서 web storage에 저장할 수 있는 페이지를 추가하는 방법을 시도했다. 하지만, 개발 도중 accessToken을 url에 그대로 노출해도 보안상에 문제가 없다는 것을 알았다.</li>
+</ul>
+<h2>깨달은 점</h2>
+<ul>
+<li>
+<p>message 이벤트, window api인 open, opener에 대한 것들을 빠삭하게 공부한 시간이었다.</p>
+</li>
+<li>
+<p>요구사항을 확실하게 정리하는 것도 좋지만, 몇 개 없는 페이지에서 조건별로 다양하게 동작해야 한다면 플로우차트를 그리는 것이 좋은 것 같다. 이번에 그려봤을 때 한눈에 흐름을 파악해서 놓친 부분이 없는지 확인하기가 쉬웠고, 기획이나 팀원에게 공유할 때도 매우 좋은 피드백을 받았다.</p>
+</li>
+<li>
+<p>지레짐작 하는 것은 개발하면서 정말 좋지 않은 태도다. 당연한 것은 없다. 그런데, 이번에 개발할 때 accessToken을 당연하게 url에 노출하면 안된다고 생각을 했고, 그 태도가 결과적으로는 개발 시간을 더 낮추는 문제가 되었다. 모든지 의심하고 궁금해하고 확실히 하나씩 집고 넘어가야 한다. 개발을 시작하면서 이런 태도를 항상 가지고자 하지만, 시간이 긴박해서인지 순간적으로 침착하지 못했다. 가장 빠른 길은 돌아가는 길이다. 급할수록 돌아가야 한다는 것을 또 크게 깨달은 프로젝트였다.</p>
+</li>
+</ul></div><style data-emotion="css hx9xpc">@media (max-width: 768px){.css-hx9xpc{padding:0 20px;}}</style><div class="css-hx9xpc e1gqsjds0"></div><style data-emotion="css 9w9jmx">.css-9w9jmx{display:grid;place-items:center;margin-top:auto;padding:50px 0;font-size:15px;text-align:center;line-height:1.5;}@media (max-width: 768px){.css-9w9jmx{font-size:13px;}}</style><footer class="css-9w9jmx e1oae0v80">Thank You for Visiting My blog, Have a Good Day 😆<br/>© 2023 Developer Park, Powered By Gatsby.</footer></main></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/TrobuleShooting/interlock_use_message/";/*]]>*/</script><!-- slice-start id="_gatsby-scripts-1" -->
           <script
             id="gatsby-chunk-mapping"
           >
             window.___chunkMapping="{\"app\":[\"/app-f83ddc40e37b902af910.js\"],\"component---src-pages-404-tsx\":[\"/component---src-pages-404-tsx-3ec362fd21ae020101bb.js\"],\"component---src-pages-index-tsx\":[\"/component---src-pages-index-tsx-73396903442239393d3b.js\"],\"component---src-pages-info-tsx\":[\"/component---src-pages-info-tsx-f473e748cdc22dcb687c.js\"],\"component---src-templates-post-template-tsx\":[\"/component---src-templates-post-template-tsx-1d7b641c17954381a2eb.js\"]}";
           </script>
-        <script>window.___webpackCompilationHash="017fee9a355b8ab72eea";</script><script src="/webpack-runtime-ef803deb7d8431303bd6.js" async></script><script src="/framework-6e68b7056956344bfd29.js" async></script><script src="/app-f83ddc40e37b902af910.js" async></script><!-- slice-end id="_gatsby-scripts-1" --></body></html>
+        <script>window.___webpackCompilationHash="3f2dac76884f3286f11a";</script><script src="/webpack-runtime-e890d82f9da70bdec694.js" async></script><script src="/framework-6e68b7056956344bfd29.js" async></script><script src="/app-f83ddc40e37b902af910.js" async></script><!-- slice-end id="_gatsby-scripts-1" --></body></html>
