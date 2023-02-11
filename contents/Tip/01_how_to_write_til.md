@@ -2,7 +2,7 @@
 date: '2023-01-07'
 title: 'alias를 이용해 마크다운 에디터로 깃헙블로그와 TIL을 편하게 쓰기'
 categories: ['Tip']
-summary: '이동 중 시간을 효율적으로 사용해보고 TIL을 쓰며 깃헙잔디도 찍어보자.'
+summary: 'CI/CD없이 빠르고 간편하게 내가 원하는 명령어들을 만들어보자.'
 thumbnail: '../images/image-20230101171834438.png'
 ---
 
