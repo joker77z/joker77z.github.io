@@ -1,6 +1,6 @@
 ---
 date: '2023-01-16'
-title: 'Message 및 window API의 open, opener를 이용하여 다른 도메인 데이터 주고받기'
+title: '백엔드없이 다른 도메인끼리 데이터 주고받고 팝업 제어하기'
 categories: ['Diary']
 summary: '별거 아닐 것 같았던 일에서 많은 배움을 얻었다.'
 thumbnail: '../images/image-20230101171834438.png'
