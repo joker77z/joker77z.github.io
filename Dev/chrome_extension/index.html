@@ -56,7 +56,91 @@
 <p><strong>조직 내에서만 배포하는 방법은?</strong>
 <a href="https://developer.chrome.com/docs/webstore/cws-enterprise/" target="_blank" rel="nofollow">기업 배포 옵션</a>을 참고하자.</p>
 </blockquote>
-<h2>Development basics</h2></div><style data-emotion="css hx9xpc">@media (max-width: 768px){.css-hx9xpc{padding:0 20px;}}</style><div class="css-hx9xpc e1gqsjds0"></div><style data-emotion="css 9w9jmx">.css-9w9jmx{display:grid;place-items:center;margin-top:auto;padding:50px 0;font-size:15px;text-align:center;line-height:1.5;}@media (max-width: 768px){.css-9w9jmx{font-size:13px;}}</style><footer class="css-9w9jmx e1oae0v80">Thank You for Visiting My blog, Have a Good Day 😆<br/>© 2023 Developer Park, Powered By Gatsby.</footer></main></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/Dev/chrome_extension/";/*]]>*/</script><!-- slice-start id="_gatsby-scripts-1" -->
+<h2>Development basics</h2>
+<p>크롬 익스텐션 개발의 기본을 배워보자.</p>
+<h3>개요</h3>
+<p>익스텐션 개발과정을 설명한다. 우리는  “Hello, Extensions” 예제를 만들고 로컬에서 익스텐션 로드하고, 로그를 찾고 다른 권장사항을 살펴본다.</p>
+<h3>Hello Extensions</h3>
+<p>이 익스텐션은 익스텐션 툴바 아이콘을 유저가 클릭했을 때 “Hello Extensions”를 보여줄 것이다.</p>
+<p>새 디렉터리를 만드는 것부터 시작한다. 만약 너가 모든 소스를 다운로드하기를 원한다면 <a href="https://github.com/GoogleChrome/chrome-extensions-samples/tree/main/functional-samples/tutorial.hello-world" target="_blank" rel="nofollow">깃헙</a>에서 받을 수 있다.</p>
+<p>다음으로, 디렉토리안에 새 파일을 만든다. 파일이름은 <code class="language-text">manifest.json</code>으로 만들고 다음 코드를 입력한다.</p>
+<div class="gatsby-highlight" data-language="json"><pre class="language-json"><code class="language-json"><span class="token punctuation">{</span>
+  <span class="token property">"manifest_version"</span><span class="token operator">:</span> <span class="token number">3</span><span class="token punctuation">,</span>
+  <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"Hello Extensions"</span><span class="token punctuation">,</span>
+  <span class="token property">"description"</span><span class="token operator">:</span> <span class="token string">"Base Level Extension"</span><span class="token punctuation">,</span>
+  <span class="token property">"version"</span><span class="token operator">:</span> <span class="token string">"1.0"</span><span class="token punctuation">,</span>
+  <span class="token property">"action"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">"default_popup"</span><span class="token operator">:</span> <span class="token string">"hello.html"</span><span class="token punctuation">,</span>
+    <span class="token property">"default_icon"</span><span class="token operator">:</span> <span class="token string">"hello_extensions.png"</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre></div>
+<p>이 JSON 파일이 익스텐션의 기능과 구성을 설명한다. 예를 들어 action키는 icon 이미지와 클릭했을 때 나오는 html파일을 선언하고 있다. <a href="https://developer.chrome.com/docs/extensions/mv3/getstarted/development-basics/#:~:text=action%20is%20clicked.-,Download%20the%20icon,-to%20your%20directory" target="_blank" rel="nofollow">아이콘 이미지</a>를 디렉토리에 다운받고 default_icon과 이름을 맞춰주자.</p>
+<p>popup을 위해서 hello.html파일을 만들고 다음 코드를 작성하자.</p>
+<div class="gatsby-highlight" data-language="html"><pre class="language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h1</span><span class="token punctuation">></span></span>Hello Extensions<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h1</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">></span></span></code></pre></div>
+<p>이제 툴바 아이콘을 클릭하면 팝업에서 보인다. 자 이제 크롬에서 테스트해보자.</p>
+<h3>압축해제된 익스텐션 로드하기</h3>
+<p>개발자 모드에서 압축해제된 익스텐션을 로드하려면 다음과 같이 한다.</p>
+<ol>
+<li><code class="language-text">chrome://extensions</code>로 이동한다.</li>
+<li>우측 상단에 개발자 모드 토글을 온한다.</li>
+<li><code class="language-text">Load unpacked</code> 버튼을 클릭해서 만든 익스텐션 디렉토리를 오픈한다.</li>
+</ol>
+<p>완료!</p>
+<h3>익스텐션 리로드</h3>
+<p>manifest파일을 수정했을 때는 reload버튼으로 바로 반영할 수 있다.</p>
+<p><img src="https://wd.imgix.net/image/BhuKGJaIeLNPW9ehns59NfwqKxF2/4Ph3qL9aUyswxmhauRFB.png?auto=format" alt="Reload an extension"></p>
+<blockquote>
+<p><strong>변경 내용을 보기 위해 항상 새로고침을 눌러야 할까?</strong>
+그렇지 않다.</p>
+<table>
+<thead>
+<tr>
+<th>Extension component</th>
+<th align="center">Requires extension reload</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>The manifest</td>
+<td align="center">Yes</td>
+</tr>
+<tr>
+<td>Service worker</td>
+<td align="center">Yes</td>
+</tr>
+<tr>
+<td>Content Scripts</td>
+<td align="center">Yes (plus the host page)</td>
+</tr>
+<tr>
+<td>The popup</td>
+<td align="center">No</td>
+</tr>
+<tr>
+<td>Options page</td>
+<td align="center">No</td>
+</tr>
+<tr>
+<td>Other extension HTML pages</td>
+<td align="center">No</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<h3>console.logs와 errors</h3>
+<p>console.log는 팝업 우측을 눌러서 개발자 도구에 진입한 뒤 확인할 수 있다.</p>
+<p><img src="https://wd.imgix.net/image/BhuKGJaIeLNPW9ehns59NfwqKxF2/vHGHW1o4J0kZgUkAteRQ.png?auto=format" alt="Inspecting the popup"></p>
+<p>만약, 신텍스 에러가 있다면 익스텐션 목록에서 Errors를 확인할 수 있다.</p>
+<p><img src="https://wd.imgix.net/image/BhuKGJaIeLNPW9ehns59NfwqKxF2/a9lAHCJZZrebOSKrkPRD.png?auto=format" alt="Extensions page with error button"></p>
+<h3>익스텐션 프로젝트 구조</h3>
+<p>많은 익스텐션 구조가 있지만, manifest.json파일은 루트에 있어야 한다. 아래는 예시 구조다.</p>
+<p><img src="https://wd.imgix.net/image/BhuKGJaIeLNPW9ehns59NfwqKxF2/hjccQNanPjTDpIajkhPU.png?auto=format" alt="The contents of an extension folder: manifest.json, background.js, scripts folder, popup folder, and images folder."></p>
+<h3>타입스크립트 사용하기</h3>
+<p>만약, 코드에디터로 개발한다면, npm 패키지인 chrome-types를 받아 Chrome API에 대해 자동완성을 시킬 수 있다. 이 npm 패키지는 크로미윰 소스코드가 바뀐다면 자동으로 업데이트 된다.</p></div><style data-emotion="css hx9xpc">@media (max-width: 768px){.css-hx9xpc{padding:0 20px;}}</style><div class="css-hx9xpc e1gqsjds0"></div><style data-emotion="css 9w9jmx">.css-9w9jmx{display:grid;place-items:center;margin-top:auto;padding:50px 0;font-size:15px;text-align:center;line-height:1.5;}@media (max-width: 768px){.css-9w9jmx{font-size:13px;}}</style><footer class="css-9w9jmx e1oae0v80">Thank You for Visiting My blog, Have a Good Day 😆<br/>© 2023 Developer Park, Powered By Gatsby.</footer></main></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/Dev/chrome_extension/";/*]]>*/</script><!-- slice-start id="_gatsby-scripts-1" -->
           <script
             id="gatsby-chunk-mapping"
           >
