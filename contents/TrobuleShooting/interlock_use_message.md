@@ -1,6 +1,6 @@
 ---
 date: '2023-01-16'
-title: 'windowAPI postMessage를 이용하여 데이터 주고 받고 팝업 제어하기'
+title: 'postMessage를 이용하여 교차출처간 데이터 주고 받고 팝업 제어하기'
 categories: ['Diary']
 summary: '별거 아닐 것 같았던 일에서 많은 배움을 얻었다.'
 thumbnail: '../images/image-20230101171834438.png'
