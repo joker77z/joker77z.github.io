@@ -326,6 +326,18 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
 
+## 최종 결과물
+
+- ver1
+
+<img src="../images/chrome extension ver.1.png" alt="img" style="zoom:50%;" />
+
+- ver2
+
+![image-20230518145307930](../images/chrome extension ver.2.png)
+
+
+
 ## 후기
 
 - 현 회사의 경우 보안이 매우 엄격해서 크롬 익스텐션을 만들고 크롬에 로컬로 업로드하는 것조차 쉽지 않았다. 팀장님과 정보보호셀을 설득하면서 진행했는데, 다들 적극적으로 도와주셔서 시작할 수 있었고 적극적인 백엔드 동료가 있어서 크롬 익스텐션 전용 api를 만들 수 있었고 더 성공적으로 초기버전을 만들 수 있었다.
