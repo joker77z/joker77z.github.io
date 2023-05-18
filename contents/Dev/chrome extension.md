@@ -1,7 +1,7 @@
 ---
 date: '2023-05-18'
 title: '회사에서 chrome extension 제작기'
-categories: ['troublueShooting']
+categories: ['troubleShooting']
 summary: 'Chrome Extension으로 업무 효율성을 올려보자.'
 thumbnail: '../images/image-20230101171834438.png'
 ---
