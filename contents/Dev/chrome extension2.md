@@ -330,13 +330,13 @@ window.addEventListener('DOMContentLoaded', () => {
 
 - ver1
 
-![img](../images/chrome extension ver1.png)
+![img](../images/chrome-extension-ver1.png)
 
 
 
 - ver2
 
-![img](../images/chrome extension ver2.png)
+![img](../images/chrome-extension-ver2.png)
 
 ver.1에서는 기능을 추가할 때마다 세로로 길어지면서 아이콘과 기능 사이 거리가 멀어지는 단점이 있었다. 토글로 한번 ON해놓고 건들이지 않을 수 있는 기능들은 하위에 배치하고 자주 사용하는 기능들은 위에 배치해서 아이콘과의 거리를 줄였다.
 
