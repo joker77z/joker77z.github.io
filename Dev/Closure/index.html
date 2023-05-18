@@ -5,35 +5,91 @@
 <li>이 길고 긴 파일에서 전역 변수는 최상단에 선언되어있다. 심지어 변수명을 이해할 수 없는 변수들도 존재한다. 그리고 어디서 사용되는지, 사용되기는 하는지 알 수가 없는 변수가 한 가득이다.</li>
 </ul>
 <p>이런 상황에서 새로운 서비스와 연동하기 위한 기능들을 추가해야 하는데 기존 구조에 다른 관심사를 가진 기능들을 추가하게 된다면, 코드를 작성한 자신 조차도 시간이 지났을 때 기존 구조를 파악하는데 시간이 오래 걸릴 것이다. 그림으로 보면 아래와 같은 모습 일 것이다. 주황색은 새로운 서비스를 연동하기 위해 추가한 코드이고 검정색은 기존 코드들이다.</p>
-<span class="gatsby-resp-image-wrapper" style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 514px; ">
-      <a class="gatsby-resp-image-link" href="/static/afccce3d4ea45a59a45088288293b5f6/1cbe9/closure-not-apply.png" style="display: block" target="_blank" rel="noopener">
-    <span class="gatsby-resp-image-background-image" style="padding-bottom: 215.625%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAArCAYAAAB4pah1AAAACXBIWXMAABYlAAAWJQFJUiTwAAAC/0lEQVR42s2WXUiTURjHzza3aYWkaRpCW5tbeZWytaUX0UVIViAUGlIX0QeBWM596tx8l+6rUqcoQWS7MA0qLDNQRxp5WRd100W3ldj8mF+ROhP+sbNJM6jgOKGLH+c9B97/eZ/3/5znOWT5wyjmH9djYcCDhX4nE4sDbsw9sSH0/iXI2tBNhHXpCNsOIGzNZWLVth9Lukx87XOBjPk9aDqSitbSXDSfkjLRWiqH82gahu66QK7rjSCEgBB+bGSBR0ddRMtiNtOJWCSEgEeYEAmTqAbVSrjgtRrjhs/eDPT3PW53oFzOwxVtNi6qM5i4rM3CWaUQD1o5kI+PbuH5mQwMX8rD4AUFE5F3+8uy8LbbA1KdSJcNJhBzzBSRUAgejzAhTIozxWQy0UlSbJEFgUBAR/OWCMaHzOcRJjaEXGMwxXYSbMKUqKF6ownEy9UhjRAod2+HLF3MhCJzGzL4BO6GOpDFIR8mqiUI2lQIWg/Gkf+X+W/PNhXGdTJ8etoMshRoQ8iwD7OOQ5i1FzAxx6kxbZRjvL8Z5HugDdN6KWY4NWZs+UyEGlSYNMjx5VmcYIhTI2QvYINT/xL8NuxDsEaKqQY1purzmZi2qzChl+FzRHBtpB1hqxyrbi3CTSomVl0aLFuVmBxoAXnT7UHnsVT4y3LRdVrKhL9Mjs7iNLzqcoHoElht6CGxJPro/f/VxmKJhpwc6Xp8woR4vetZtqLrjd5zwnY4Bd4TEriLc5jwlkhgL9qBF3caQX6MtGOlTo6wS4uVJhUTYZcGS1YFgpHEjhf814lY+dNavGAk5HptCjwlEjiLc5hwH9+L+sJYyIk0hfZ4YywP+QL2POTxo3lIc/pdjxf3S3ait0KJnnIZEw8rFOg6uQtjfhcIXncAjUqgpQi4rWGjpRBozMP8oA+kr+MGzin5qCzag6uaTCYqC7NxPk+EXp8j/kqcIFMSfoOtra2NFofkZFpxWBCLxVSDalVVVW061HWoViAQgMFggMPhgN1uZ4LjOJqDEa2fQnPc4F2j0NUAAAAASUVORK5CYII='); background-size: cover; display: block;"></span>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 514px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/afccce3d4ea45a59a45088288293b5f6/1cbe9/closure-not-apply.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 215.625%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAArCAYAAAB4pah1AAAACXBIWXMAABYlAAAWJQFJUiTwAAAC/0lEQVR42s2WXUiTURjHzza3aYWkaRpCW5tbeZWytaUX0UVIViAUGlIX0QeBWM596tx8l+6rUqcoQWS7MA0qLDNQRxp5WRd100W3ldj8mF+ROhP+sbNJM6jgOKGLH+c9B97/eZ/3/5znOWT5wyjmH9djYcCDhX4nE4sDbsw9sSH0/iXI2tBNhHXpCNsOIGzNZWLVth9Lukx87XOBjPk9aDqSitbSXDSfkjLRWiqH82gahu66QK7rjSCEgBB+bGSBR0ddRMtiNtOJWCSEgEeYEAmTqAbVSrjgtRrjhs/eDPT3PW53oFzOwxVtNi6qM5i4rM3CWaUQD1o5kI+PbuH5mQwMX8rD4AUFE5F3+8uy8LbbA1KdSJcNJhBzzBSRUAgejzAhTIozxWQy0UlSbJEFgUBAR/OWCMaHzOcRJjaEXGMwxXYSbMKUqKF6ownEy9UhjRAod2+HLF3MhCJzGzL4BO6GOpDFIR8mqiUI2lQIWg/Gkf+X+W/PNhXGdTJ8etoMshRoQ8iwD7OOQ5i1FzAxx6kxbZRjvL8Z5HugDdN6KWY4NWZs+UyEGlSYNMjx5VmcYIhTI2QvYINT/xL8NuxDsEaKqQY1purzmZi2qzChl+FzRHBtpB1hqxyrbi3CTSomVl0aLFuVmBxoAXnT7UHnsVT4y3LRdVrKhL9Mjs7iNLzqcoHoElht6CGxJPro/f/VxmKJhpwc6Xp8woR4vetZtqLrjd5zwnY4Bd4TEriLc5jwlkhgL9qBF3caQX6MtGOlTo6wS4uVJhUTYZcGS1YFgpHEjhf814lY+dNavGAk5HptCjwlEjiLc5hwH9+L+sJYyIk0hfZ4YywP+QL2POTxo3lIc/pdjxf3S3ait0KJnnIZEw8rFOg6uQtjfhcIXncAjUqgpQi4rWGjpRBozMP8oA+kr+MGzin5qCzag6uaTCYqC7NxPk+EXp8j/kqcIFMSfoOtra2NFofkZFpxWBCLxVSDalVVVW061HWoViAQgMFggMPhgN1uZ4LjOJqDEa2fQnPc4F2j0NUAAAAASUVORK5CYII='); background-size: cover; display: block;"
+  ></span>
   <picture>
-          <source srcset="/static/afccce3d4ea45a59a45088288293b5f6/a59e9/closure-not-apply.webp 192w,
+          <source
+              srcset="/static/afccce3d4ea45a59a45088288293b5f6/a59e9/closure-not-apply.webp 192w,
 /static/afccce3d4ea45a59a45088288293b5f6/0ca9f/closure-not-apply.webp 384w,
-/static/afccce3d4ea45a59a45088288293b5f6/b37eb/closure-not-apply.webp 514w" sizes="(max-width: 514px) 100vw, 514px" type="image/webp">
-          <source srcset="/static/afccce3d4ea45a59a45088288293b5f6/3b721/closure-not-apply.png 192w,
+/static/afccce3d4ea45a59a45088288293b5f6/b37eb/closure-not-apply.webp 514w"
+              sizes="(max-width: 514px) 100vw, 514px"
+              type="image/webp"
+            />
+          <source
+            srcset="/static/afccce3d4ea45a59a45088288293b5f6/3b721/closure-not-apply.png 192w,
 /static/afccce3d4ea45a59a45088288293b5f6/66595/closure-not-apply.png 384w,
-/static/afccce3d4ea45a59a45088288293b5f6/1cbe9/closure-not-apply.png 514w" sizes="(max-width: 514px) 100vw, 514px" type="image/png">
-          <img class="gatsby-resp-image-image" src="/static/afccce3d4ea45a59a45088288293b5f6/1cbe9/closure-not-apply.png" alt="closure-not-apply" title="closure-not-apply" loading="lazy" decoding="async" style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;">
+/static/afccce3d4ea45a59a45088288293b5f6/1cbe9/closure-not-apply.png 514w"
+            sizes="(max-width: 514px) 100vw, 514px"
+            type="image/png"
+          />
+          <img
+            class="gatsby-resp-image-image"
+            src="/static/afccce3d4ea45a59a45088288293b5f6/1cbe9/closure-not-apply.png"
+            alt="img"
+            title="img"
+            loading="lazy"
+            decoding="async"
+            style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+          />
         </picture>
   </a>
-    </span>
+    </span></p>
 <p>새로운 서비스와 연동하는데 필요한 변수들과 함수들을 기존 코드와 격리시키고 객체명만 보고도 어떤 기능들을 가지고 있는지 알면 좋겠다라고 생각했다. 그래서 클로저 패턴을 사용했다. 기존에 있던 로직들 사이에서는 클로저가 반환하는 함수만 사용하는 것이다. 이렇게 되면 기존 오래된 서비스 로직을 파악할 때는 새로운 서비스에서 사용되고 있는 로직들을 파악할 필요가 없다. 즉, 클로저 내부에서 어떤 변수가 사용되고, 어떻게 동작하는지 알 필요가 없다. 만약, 새로운 서비스와 연동하는데에서 발생한 문제라면 모듈화한 클로저 속에서 어떤 로직의 문제일 것이니 찾기도 쉬울 것이다. 그림으로 보면 아래와 같은 모습일 것이다.</p>
-<span class="gatsby-resp-image-wrapper" style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 510px; ">
-      <a class="gatsby-resp-image-link" href="/static/0d50a0c98b94148cee91c640524a87b9/1b7d6/closure-apply.png" style="display: block" target="_blank" rel="noopener">
-    <span class="gatsby-resp-image-background-image" style="padding-bottom: 215.10416666666666%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAArCAYAAAB4pah1AAAACXBIWXMAABYlAAAWJQFJUiTwAAAB9ElEQVR42u2U30tTUQDHv/OeZqWWWAtGotS2tIUxt1o9RhCWOO82owyN6KWXkJzzbnd6t/ULVyTrF731llLUgz34D9XTtAnVy6CHfePcGfkgBGcL+rGHz8Ph8Plw7vlx8WCxyAujcV68cpXxyxNKSPd8JMal12+Im+Mj7Abo7wT7OtSQ7kGAD7MG8e2twUruGCsLp1m5H1ZDulk/S6tPiS/LCa4bPpZzIX6yAkrYruHlx/dF4utyguXUEW7kQixnA9sw+Mux7W4X3JCTKthB3/8XbO7hnxv8vDTN0qyPa1aQa/MBNawgS0kvP6wUieq7JKv5o6wWTrG6cEIN6eb7ub76hHhlXedMuIPzZ7uZOeNWQrozJ9u48uIecW44QgANITGbJuKxqD1wCo2aA0o4dwi7MZcxCV3X7YGmacor++Ga5u8IRqPRuoNia3Akom9OtNRxIDU3lTaJa+Nj3A3QvaeVB9qEEu69rdwJ8G52jihMTXCoV3BsYB9j/k4lpDvU08KXj24Tw5HRzWU76vjkmmuk0j8PRW6sA1BCiNqhZMy/4h42g83gPxlsyFvWtrzlhv9tbkxeossJelztPNS1Swmvq537BVi4YxG3JnV6nOCgS+PxLigh3cMCXMynianpJHt9/RwIhukPhJSQbo+nj4+fPed3KbK0sGNwF+YAAAAASUVORK5CYII='); background-size: cover; display: block;"></span>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 510px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/0d50a0c98b94148cee91c640524a87b9/1b7d6/closure-apply.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 215.10416666666666%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAArCAYAAAB4pah1AAAACXBIWXMAABYlAAAWJQFJUiTwAAAB9ElEQVR42u2U30tTUQDHv/OeZqWWWAtGotS2tIUxt1o9RhCWOO82owyN6KWXkJzzbnd6t/ULVyTrF731llLUgz34D9XTtAnVy6CHfePcGfkgBGcL+rGHz8Ph8Plw7vlx8WCxyAujcV68cpXxyxNKSPd8JMal12+Im+Mj7Abo7wT7OtSQ7kGAD7MG8e2twUruGCsLp1m5H1ZDulk/S6tPiS/LCa4bPpZzIX6yAkrYruHlx/dF4utyguXUEW7kQixnA9sw+Mux7W4X3JCTKthB3/8XbO7hnxv8vDTN0qyPa1aQa/MBNawgS0kvP6wUieq7JKv5o6wWTrG6cEIN6eb7ub76hHhlXedMuIPzZ7uZOeNWQrozJ9u48uIecW44QgANITGbJuKxqD1wCo2aA0o4dwi7MZcxCV3X7YGmacor++Ga5u8IRqPRuoNia3Akom9OtNRxIDU3lTaJa+Nj3A3QvaeVB9qEEu69rdwJ8G52jihMTXCoV3BsYB9j/k4lpDvU08KXj24Tw5HRzWU76vjkmmuk0j8PRW6sA1BCiNqhZMy/4h42g83gPxlsyFvWtrzlhv9tbkxeossJelztPNS1Swmvq537BVi4YxG3JnV6nOCgS+PxLigh3cMCXMynianpJHt9/RwIhukPhJSQbo+nj4+fPed3KbK0sGNwF+YAAAAASUVORK5CYII='); background-size: cover; display: block;"
+  ></span>
   <picture>
-          <source srcset="/static/0d50a0c98b94148cee91c640524a87b9/a59e9/closure-apply.webp 192w,
+          <source
+              srcset="/static/0d50a0c98b94148cee91c640524a87b9/a59e9/closure-apply.webp 192w,
 /static/0d50a0c98b94148cee91c640524a87b9/0ca9f/closure-apply.webp 384w,
-/static/0d50a0c98b94148cee91c640524a87b9/a1a7b/closure-apply.webp 510w" sizes="(max-width: 510px) 100vw, 510px" type="image/webp">
-          <source srcset="/static/0d50a0c98b94148cee91c640524a87b9/3b721/closure-apply.png 192w,
+/static/0d50a0c98b94148cee91c640524a87b9/a1a7b/closure-apply.webp 510w"
+              sizes="(max-width: 510px) 100vw, 510px"
+              type="image/webp"
+            />
+          <source
+            srcset="/static/0d50a0c98b94148cee91c640524a87b9/3b721/closure-apply.png 192w,
 /static/0d50a0c98b94148cee91c640524a87b9/66595/closure-apply.png 384w,
-/static/0d50a0c98b94148cee91c640524a87b9/1b7d6/closure-apply.png 510w" sizes="(max-width: 510px) 100vw, 510px" type="image/png">
-          <img class="gatsby-resp-image-image" src="/static/0d50a0c98b94148cee91c640524a87b9/1b7d6/closure-apply.png" alt="closure-apply" title="closure-apply" loading="lazy" decoding="async" style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;">
+/static/0d50a0c98b94148cee91c640524a87b9/1b7d6/closure-apply.png 510w"
+            sizes="(max-width: 510px) 100vw, 510px"
+            type="image/png"
+          />
+          <img
+            class="gatsby-resp-image-image"
+            src="/static/0d50a0c98b94148cee91c640524a87b9/1b7d6/closure-apply.png"
+            alt="img"
+            title="img"
+            loading="lazy"
+            decoding="async"
+            style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+          />
         </picture>
   </a>
-    </span>
+    </span></p>
 <h2>코드</h2>
 <p>간단하게 축약한 코드로 살펴보면 다음과 같다. jodaFn에서는 <code class="language-text">init</code>함수와 <code class="language-text">openJobdaLoginPopupAndLoadProfile</code>함수만 내보내서 필요한 곳에서 사용하고 있다. 이로서 jobda(새로운 서비스)와 관련된 로직을 파악할 때는 이곳만 보면 해당 js파일에서 어떤 로직들이 사용되는지 한눈에 파악할 수 있다.</p>
 <div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"><span class="token keyword">let</span> RegistResume <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
