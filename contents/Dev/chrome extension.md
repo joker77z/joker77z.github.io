@@ -1,4 +1,12 @@
-## Chrome Extension
+---
+date: '2023-05-18'
+title: '2022년 회고록'
+categories: ['troublueShooting']
+summary: '회사에서 chrome extension 제작기#1'
+thumbnail: '../images/image-20230101171834438.png'
+---
+
+
 
 개발 후 검증할 때 다양한 계약에 따라 많은 도메인에 접속해서 검증을 해야 한다. 
 

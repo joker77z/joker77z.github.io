@@ -1,3 +1,12 @@
+---
+date: '2023-05-18'
+title: '2022년 회고록'
+categories: ['troublueShooting']
+summary: '회사에서 chrome extension 제작기#2'
+thumbnail: '../images/image-20230101171834438.png'
+
+---
+
 ## 아이콘을 눌렀을 때 나오는 html 페이지 : popup.html
 
 Chrome Extension 아이콘을 눌렀을 때 나오는 html 페이지를 만들 순서다.
