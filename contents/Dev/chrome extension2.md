@@ -1,8 +1,8 @@
 ---
 date: '2023-05-18'
-title: '2022년 회고록'
+title: '회사에서 chrome extension 제작기#2'
 categories: ['troublueShooting']
-summary: '회사에서 chrome extension 제작기#2'
+summary: 'Chrome Extension으로 업무 효율성을 올려보자.'
 thumbnail: '../images/image-20230101171834438.png'
 
 ---
