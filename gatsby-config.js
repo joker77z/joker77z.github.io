@@ -9,9 +9,9 @@
  */
 module.exports = {
   siteMetadata: {
-    title: `주니어 개발자의 개발 블로그`,
-    description: `주니어 개발자로서 2023년부터 다시 작성하기 시작한 블로그입니다.`,
-    author: `Park`,
+    title: `프론트엔드 박태준의 개발 블로그`,
+    description: `공유하는 것을 좋아하는 개발자`,
+    author: `ParkTaeJoon`,
     siteUrl: `https://joker77z.github.io`,
   },
   plugins: [

@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import PostItem from 'components/Main/PostItem'
+import PostItem from 'components/Main3/PostItem'
 import { PostListItemType } from '../../types/PostItem.types'
 import { useInfiniteScroll } from 'hooks/useInfiniteScroll'
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import ProfileImage from 'components/Main/ProfileImage'
+import ProfileImage from 'components/Main3/ProfileImage'
 import { IGatsbyImageData } from 'gatsby-plugin-image'
 
 const Background = styled.div`

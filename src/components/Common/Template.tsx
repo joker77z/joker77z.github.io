@@ -1,13 +1,20 @@
 import React, { FunctionComponent, ReactNode } from 'react'
 import styled from '@emotion/styled'
-import GlobalStyle from 'components/Common/GlobalStyle'
 import Footer from 'components/Common/Footer'
 import { Helmet } from 'react-helmet'
+import GlobalStyle from './GlobalStyle'
 
 const Container = styled.main`
   display: flex;
-  flex-direction: column;
-  height: 100%;
+  flex-direction: row;
+  height: 100vh;
+  width: 100vw;
+
+  justify-content: center;
+  padding-top: 128px;
+
+  color: white;
+  background: #141414;
 `
 
 type TemplateProps = {
@@ -62,7 +69,7 @@ const Template: FunctionComponent<TemplateProps> = function ({
       </Helmet>
       <GlobalStyle />
       {children}
-      <Footer />
+      {/* <Footer /> */}
     </Container>
   )
 }

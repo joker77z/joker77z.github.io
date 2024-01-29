@@ -1,16 +1,24 @@
-import React, { useMemo } from 'react'
-import GlobalStyle from 'components/Common/GlobalStyle'
-import Introduction from 'components/Main/Introduction'
-import Footer from 'components/Common/Footer'
-import CategoryList, { CategoryListProps } from 'components/Main/CategoryList'
-import PostList from 'components/Main/PostList'
 import { graphql } from 'gatsby'
-import { PostListItemType } from '../types/PostItem.types'
-import { IGatsbyImageData } from 'gatsby-plugin-image'
-import queryString, { ParsedQuery } from 'query-string'
+import Introduction from 'components/Main3/Introduction'
 import Template from 'components/Common/Template'
+import { IGatsbyImageData } from 'gatsby-plugin-image'
+import {
+  Description,
+  Main,
+  Introduce,
+  TableOfContents,
+  ListItem,
+  TableOfContentsSection,
+  TagSection,
+  Tag,
+  TagList,
+  SectionHeader,
+  ListLink,
+  ItemLink,
+  LinkItem,
+} from './style/index.style'
 
-type IndexPageProps = {
+type IndexPage = {
   location: {
     search: string
   }
@@ -22,9 +30,6 @@ type IndexPageProps = {
         siteUrl: string
       }
     }
-    allMarkdownRemark: {
-      edges: PostListItemType[]
-    }
     file: {
       childImageSharp: {
         gatsbyImageData: IGatsbyImageData
@@ -33,50 +38,19 @@ type IndexPageProps = {
     }
   }
 }
+
 export default function IndexPage({
   location: { search },
   data: {
     site: {
       siteMetadata: { title, description, siteUrl },
     },
-    allMarkdownRemark: { edges },
     file: {
       childImageSharp: { gatsbyImageData },
       publicURL,
     },
   },
-}: IndexPageProps) {
-  const parsed: ParsedQuery<string> = queryString.parse(search)
-  const selectedCategory: string =
-    typeof parsed.category !== 'string' || !parsed.category
-      ? 'All'
-      : parsed.category
-
-  const categoryList = useMemo(
-    () =>
-      edges.reduce(
-        (
-          list: CategoryListProps['categoryList'],
-          {
-            node: {
-              frontmatter: { categories },
-            },
-          }: PostListItemType,
-        ) => {
-          categories.forEach(category => {
-            if (list[category] === undefined) list[category] = 1
-            else list[category]++
-          })
-
-          list['All']++
-
-          return list
-        },
-        { All: 0 },
-      ),
-    [],
-  )
-
+}: IndexPage) {
   return (
     <Template
       title={title}
@@ -84,46 +58,60 @@ export default function IndexPage({
       url={siteUrl}
       image={publicURL}
     >
-      <Introduction profileImage={gatsbyImageData} />
-      <CategoryList
-        selectedCategory={selectedCategory}
-        categoryList={categoryList}
-      />
-      <PostList posts={edges} selectedCategory={selectedCategory} />
+      <Main>
+        <Introduce>
+          <h1>박태준 ﹒ Experience</h1>
+          <Description>
+            함께 성장하는 것을 좋아하는 FrontEnd 개발자입니다.
+            <br />
+            개발자 측면에서 어떻게 해야 가독성, 생산성을 올릴 수 있을지 DX를
+            고민합니다.
+            <br />
+            사용자 측면에서 어떻게 하면 더 편리한 서비스를 제공할 수 있을지 UX를
+            고민합니다.
+            <br />
+            <br />
+            현재 마이다스인에서 채용솔루션을 개발하고 있습니다.
+          </Description>
+        </Introduce>
+        <TableOfContentsSection>
+          <SectionHeader>목차</SectionHeader>
+          <TableOfContents>
+            <ListItem>
+              <LinkItem to="/list/?category=troubleShooting">일지</LinkItem>
+            </ListItem>
+            <ListItem>
+              <LinkItem>고민</LinkItem>
+            </ListItem>
+            <ListItem>
+              <LinkItem>성장</LinkItem>
+            </ListItem>
+            <ListItem>
+              <LinkItem>영감</LinkItem>
+            </ListItem>
+            <ListItem>
+              <LinkItem>공유</LinkItem>
+            </ListItem>
+          </TableOfContents>
+        </TableOfContentsSection>
+        <TagSection>
+          <SectionHeader>태그</SectionHeader>
+          <TagList>
+            <Tag>태그1</Tag>
+          </TagList>
+        </TagSection>
+      </Main>
     </Template>
   )
 }
 
-export const getPostList = graphql`
-  query getPostList {
+export const getMain = graphql`
+  query getMain {
     site {
       siteMetadata {
         title
         description
         siteUrl
-      }
-    }
-    allMarkdownRemark(
-      sort: { order: DESC, fields: [frontmatter___date, frontmatter___title] }
-    ) {
-      edges {
-        node {
-          id
-          fields {
-            slug
-          }
-          frontmatter {
-            title
-            summary
-            date(formatString: "YYYY.MM.DD.")
-            categories
-            thumbnail {
-              childImageSharp {
-                gatsbyImageData(width: 768, height: 400)
-              }
-            }
-          }
-        }
       }
     }
     file(name: { eq: "profile-image" }) {

@@ -1,13 +1,26 @@
 import { Global, css } from '@emotion/react'
 
 const defaultStyle = css`
-  @import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap');
+  @font-face {
+    font-family: 'Arita-buri-SemiBold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/Arita-buri-SemiBold.woff')
+      format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
 
+  h1,
+  h2 {
+    font-weight: normal;
+    font-size: 16px;
+  }
   * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    font-family: 'Gowun Dodum', serif;
+    font-family: 'Arita-buri-SemiBold';
+    font-weight: normal;
+    font-style: normal;
   }
 
   html,
