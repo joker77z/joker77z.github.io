@@ -1,40 +1,57 @@
-import { Link, graphql } from 'gatsby'
-import { useInfiniteScroll } from 'hooks/useInfiniteScroll'
-import { PostListItemType } from 'types/PostItem.types'
+import Layout from 'components/Layout/Layout';
+import ListHeader from 'components/Layout/ListHeader';
+import { graphql, navigate } from 'gatsby';
+import { useInfiniteScroll } from 'hooks/useInfiniteScroll';
+import { PostListItemType } from 'types/PostItem.types';
+import { RouteStore } from '../components/constants/route';
+import * as S from './list.style';
 
 type ListProps = {
   data: {
     allMarkdownRemark: {
-      edges: PostListItemType[]
-    }
-  }
-}
+      edges: PostListItemType[];
+    };
+  };
+};
 
 export default function List({
   data: {
     allMarkdownRemark: { edges },
   },
 }: ListProps) {
-  const selectedCategory = 'troubleShooting'
-  const { containerRef, postList } = useInfiniteScroll(selectedCategory, edges)
-  console.log('postList', postList)
+  const parseQueryStringValue = window.location.search.split('=')[1];
+
+  const { containerRef, postList } = useInfiniteScroll(
+    parseQueryStringValue,
+    edges,
+  );
+
+  if (!Object.values(RouteStore).includes(parseQueryStringValue)) {
+    return navigate('/404');
+  }
+
   return (
-    <div>
-      {postList.map(
-        ({
-          node: {
-            id,
-            fields: { slug },
-            frontmatter,
-          },
-        }: PostListItemType) => (
-          <Link to={slug}>
-            <div>{frontmatter.title}</div>
-          </Link>
-        ),
-      )}
-    </div>
-  )
+    <Layout>
+      <ListHeader />
+      <ul>
+        {postList.map(
+          ({
+            node: {
+              id,
+              fields: { slug },
+              frontmatter,
+            },
+          }: PostListItemType) => (
+            <S.LinkList>
+              <S.LinkItem to={slug} key={slug}>
+                <div>{frontmatter.title}</div>
+              </S.LinkItem>
+            </S.LinkList>
+          ),
+        )}
+      </ul>
+    </Layout>
+  );
 }
 
 export const getList = graphql`
@@ -76,4 +93,4 @@ export const getList = graphql`
       publicURL
     }
   }
-`
+`;

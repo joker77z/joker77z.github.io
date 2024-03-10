@@ -1,14 +1,14 @@
 import React, { useMemo } from 'react'
-import GlobalStyle from 'components/Common/GlobalStyle'
+import GlobalStyle from 'components/Layout/GlobalStyle'
 import Introduction from 'components/Main3/Introduction'
-import Footer from 'components/Common/Footer'
+import Footer from 'components/Layout/Footer'
 import CategoryList, { CategoryListProps } from 'components/Main3/CategoryList'
 import PostList from 'components/Main3/PostList'
 import { graphql } from 'gatsby'
 import { PostListItemType } from '../types/PostItem.types'
 import { IGatsbyImageData } from 'gatsby-plugin-image'
 import queryString, { ParsedQuery } from 'query-string'
-import Template from 'components/Common/Template'
+import Template from 'components/Layout/Template'
 
 type IndexPageProps = {
   location: {
@@ -46,12 +46,6 @@ export default function IndexPage({
     },
   },
 }: IndexPageProps) {
-  console.log('search', search)
-
-  console.log(
-    `title: ${title}, description: ${description}, siteUrl: ${siteUrl}`,
-  )
-
   const parsed: ParsedQuery<string> = queryString.parse(search)
   const selectedCategory: string =
     typeof parsed.category !== 'string' || !parsed.category

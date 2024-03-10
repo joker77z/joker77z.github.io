@@ -1,11 +1,12 @@
 import React, { FunctionComponent, ReactNode } from 'react'
 import styled from '@emotion/styled'
-import Footer from 'components/Common/Footer'
+import Footer from 'components/Layout/Footer'
 import { Helmet } from 'react-helmet'
 import GlobalStyle from './GlobalStyle'
 
 const Container = styled.main`
   display: flex;
+  gap: 52px;
   flex-direction: row;
   height: 100vh;
   width: 100vw;
@@ -13,8 +14,7 @@ const Container = styled.main`
   justify-content: center;
   padding-top: 128px;
 
-  color: white;
-  background: #141414;
+  transition: background-color 0.3s ease;
 `
 
 type TemplateProps = {
